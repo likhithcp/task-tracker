@@ -1,0 +1,484 @@
+/* =======================
+   GLOBAL / THEME
+   ======================= */
+
+:host {
+  display: block;
+  min-height: 100dvh;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+  color: #0f172a;
+}
+
+/* topbar */
+.topbar {
+  position: fixed;
+  inset: 12px 12px auto auto;
+  z-index: 30;
+}
+.toggle {
+  padding: 0.55rem 0.9rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  background: #0f172a;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(2, 6, 23, 0.2);
+}
+.scene.dark ~ .topbar .toggle {
+  background: #fff;
+  color: #0f172a;
+}
+
+/* =======================
+   COSMIC BACKDROP LAYERS
+   Everything is position:fixed with negative z-index so it never blocks clicks
+   ======================= */
+
+.scene {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+}
+
+/* galaxy gradient base */
+.galaxy {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(1200px 700px at 20% -10%, #1b1f3a 0%, #0e132a 35%, #060815 100%);
+}
+.scene.dark .galaxy {
+  background: radial-gradient(1200px 700px at 20% -10%, #050714 0%, #040510 40%, #01020a 100%);
+}
+
+/* colored aurora */
+.aurora {
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 70%;
+  background:
+    radial-gradient(60% 80% at 30% 30%, rgba(111, 76, 255, 0.45), transparent 60%),
+    radial-gradient(50% 70% at 60% 20%, rgba(0, 220, 255, 0.35), transparent 60%),
+    radial-gradient(60% 60% at 50% 60%, rgba(255, 90, 196, 0.35), transparent 60%);
+  filter: blur(50px) saturate(1.1);
+  animation: aurora-drift 30s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes aurora-drift {
+  0%   { transform: translateY(0) translateX(0) scale(1); }
+  100% { transform: translateY(30px) translateX(20px) scale(1.05); }
+}
+
+/* twinkling stars: use repeating radial-gradients for thousands of dots */
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.9) 50%, transparent 51%),
+    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,.8) 50%, transparent 51%),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 10% 60%, rgba(255,255,255,.7) 50%, transparent 51%),
+    radial-gradient(1px 1px at 90% 20%, rgba(255,255,255,.8) 50%, transparent 51%);
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  animation: twinkle 4s ease-in-out infinite;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,.3));
+  pointer-events: none;
+}
+.layer2 {
+  background-size: 240px 240px;
+  animation-duration: 6s;
+  opacity: 0.6;
+}
+.layer3 {
+  background-size: 180px 180px;
+  animation-duration: 8s;
+  opacity: 0.45;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: .4; }
+  50%      { opacity: .9; }
+}
+
+
+
+/* slow floating particles */
+.particles {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(2px 2px at 10% 90%, rgba(255,255,255,.25), transparent 40%),
+    radial-gradient(2px 2px at 30% 50%, rgba(255,255,255,.2), transparent 40%),
+    radial-gradient(2px 2px at 60% 20%, rgba(255,255,255,.18), transparent 40%),
+    radial-gradient(2px 2px at 80% 70%, rgba(255,255,255,.2), transparent 40%);
+  animation: float-particles 18s linear infinite;
+  pointer-events: none;
+  opacity: .5;
+}
+@keyframes float-particles {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-80px); }
+}
+
+/* clouds */
+.clouds { position: absolute; inset: 0; pointer-events: none; }
+.cloud {
+  position: absolute; top: 15%; left: -30%;
+  width: 240px; height: 90px; border-radius: 999px;
+  background: rgba(255,255,255,.15);
+  filter: blur(6px);
+  box-shadow:
+    40px 10px 0 10px rgba(255,255,255,.15),
+    100px 0 0 20px rgba(255,255,255,.12),
+    160px 12px 0 14px rgba(255,255,255,.12);
+  animation: drift 60s linear infinite;
+}
+.c2 { top: 28%; animation-duration: 70s; opacity: .6; }
+.c3 { top: 40%; animation-duration: 85s; opacity: .45; }
+@keyframes drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(160%); }
+}
+
+/* moon + planets with parallax */
+.sky-objects { position: absolute; inset: 0; pointer-events: none; }
+.moon {
+  position: absolute; top: 8%; right: 10%;
+  width: 120px; height: 120px; border-radius: 50%;
+  background:
+    radial-gradient(60px 60px at 40% 35%, #fff, #d8d8ff 60%, #9aa0ff 100%);
+  box-shadow: 0 0 30px rgba(198, 205, 255, 0.6);
+  animation: parallax 18s ease-in-out infinite alternate;
+}
+.planet {
+  position: absolute; border-radius: 50%;
+  box-shadow: 0 0 24px rgba(255,255,255,.3);
+  animation: parallax 24s ease-in-out infinite alternate;
+}
+.p1 {
+  width: 90px; height: 90px; left: 10%; top: 18%;
+  background: radial-gradient(circle at 30% 30%, #ffa7ec, #b46cff 70%, #5926ff);
+}
+.p2 {
+  width: 60px; height: 60px; left: 25%; top: 65%;
+  background: radial-gradient(circle at 30% 30%, #76f7ff, #25d0ff 70%, #0065ff);
+}
+@keyframes parallax {
+  0%   { transform: translateY(0) translateX(0) }
+  100% { transform: translateY(12px) translateX(10px) }
+}
+
+/* =======================
+   APP CONTENT
+   ======================= */
+
+.wrapper {
+  max-width: 560px;
+  margin: 6rem auto;
+  padding: 1.25rem;
+}
+
+.card {
+  position: relative;
+  background: #ffffffcc;
+  backdrop-filter: blur(8px);
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.18);
+  padding: 1.25rem;
+  overflow: visible;
+}
+
+@keyframes tail {
+  0%, 100% { transform: rotate(18deg); }
+  50%      { transform: rotate(-6deg); }
+}
+
+/* header & stats */
+.title {
+  display: flex; align-items: center; gap: .6rem;
+  margin: .25rem 0 1rem; font-weight: 800; letter-spacing: .2px;
+}
+.title .badge {
+  font-size: .8rem; color: #6366f1; background: #eef2ff;
+  border: 1px solid #e0e7ff; padding: .15rem .5rem; border-radius: 999px;
+}
+
+.controls {
+  display: grid; grid-template-columns: 1fr auto; gap: .6rem; margin-bottom: 1rem;
+}
+input[type="text"], input {
+  width: 100%; padding: .8rem .9rem; border: 1px solid #e5e7eb; border-radius: 10px;
+  outline: none; font-size: .98rem; transition: border-color .15s, box-shadow .15s;
+  background: #fff;
+}
+input:focus { border-color: #6366f1; box-shadow: 0 0 0 4px #eef2ff; }
+
+.btn { padding: .8rem 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 600;
+  border: none; transition: transform .06s, box-shadow .15s, background .15s; }
+.btn:active { transform: translateY(1px); }
+.btn-primary { background: #6366f1; color: #fff; box-shadow: 0 6px 16px rgba(99,102,241,.3); }
+.btn-primary:hover { background: #5558ee; }
+.btn-ghost { background: transparent; color: #ef4444; padding: .45rem .6rem; }
+.btn-ghost:hover { background: #fef2f2; color: #dc2626; border-radius: 8px; }
+
+.list { list-style: none; margin: 0; padding: 0; }
+.item {
+  display: flex; align-items: center; justify-content: space-between; gap: .8rem;
+  padding: .75rem .8rem; border: 1px solid #eaecef; border-radius: 12px; background: #fff;
+  transition: border-color .15s ease, transform .06s ease;
+}
+.item + .item { margin-top: .6rem; }
+.item:hover { border-color: #dbe2ff; }
+.item-text { flex: 1; word-break: break-word; }
+
+.empty { text-align: center; color: #6b7280; padding: 1.2rem 0 .6rem; font-size: .95rem; }
+.footer { margin-top: .9rem; font-size: .85rem; color: #6b7280;
+  display: flex; justify-content: space-between; align-items: center; }
+
+/* responsive */
+@media (max-width: 640px) {
+  .wrapper { margin: 2rem auto; padding: .8rem; }
+  .card { padding: 1rem; }
+}
+
+/* dark mode adjustments for content */
+.scene.dark ~ .wrapper .card {
+  background: rgba(16, 20, 38, 0.6);
+  border-color: rgba(255,255,255,0.08);
+  color: #e8ecff;
+}
+.scene.dark ~ .wrapper input {
+  background: rgba(255,255,255,0.95);
+}
+
+/* accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .stars, .shooting, .particles, .cloud, .moon, .planet,
+  .tail, .eye, .toggle { animation: none !important; }
+}
+/* ===== DARK THEME – HIGH CONTRAST FIX ===== */
+.scene.dark ~ .wrapper .card {
+  background: rgba(16, 20, 38, 0.85);
+  border-color: rgba(255,255,255,0.06);
+  color: #eaf0ff; /* main text */
+}
+
+.scene.dark ~ .wrapper .title .badge {
+  color: #cdd5ff;
+  background: rgba(99, 102, 241, 0.15);
+  border-color: rgba(99, 102, 241, 0.25);
+}
+
+.scene.dark ~ .wrapper input[type="text"],
+.scene.dark ~ .wrapper input {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e9edff;                 /* input text */
+  border: 1px solid #2b2f45;
+}
+
+.scene.dark ~ .wrapper input::placeholder {
+  color: #9aa3c7;                 /* placeholder */
+}
+
+.scene.dark ~ .wrapper .item {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.08);
+}
+
+.scene.dark ~ .wrapper .btn-primary {
+  background: #7c83ff;
+  color: #0b0f2a;
+  box-shadow: 0 6px 16px rgba(124,131,255,.35);
+}
+.scene.dark ~ .wrapper .btn-primary:hover { background: #96a0ff; }
+
+.scene.dark ~ .wrapper .btn-ghost {
+  color: #ff8e8e;
+}
+.scene.dark ~ .wrapper .btn-ghost:hover {
+  background: rgba(239,68,68,0.15);
+  color: #ffd2d2;
+}
+
+.scene.dark ~ .wrapper .empty,
+.scene.dark ~ .wrapper .footer { color: #aab4d6; }
+/* ===== METEOR (DIAGONAL FALL WITH BRIGHT HEAD + TAIL) ===== */
+.meteor {
+  position: absolute;
+  pointer-events: none;
+  width: 2px;                 /* tail thickness */
+  height: 140px;              /* tail length */
+  top: -120px;                /* start off-screen */
+  left: -80px;
+  transform: rotate(65deg);   /* diagonal: top-left -> bottom-right */
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.0) 20%,
+    rgba(255,255,255,0.85) 60%,
+    rgba(255,255,255,1) 80%,
+    rgba(255,255,255,0) 100%
+  );
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.9))
+          drop-shadow(0 0 16px rgba(120,160,255,.7));
+  animation: meteor-fall 3.6s linear infinite;
+  opacity: 0;
+}
+
+/* glowing head (comet tip) */
+.meteor::after {
+  content: "";
+  position: absolute;
+  bottom: -4px; left: -6px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #dbe4ff 45%, rgba(255,255,255,0) 70%);
+  box-shadow:
+    0 0 10px 4px rgba(255,255,255,.9),
+    0 0 24px 8px rgba(120,160,255,.7),
+    0 0 40px 16px rgba(90,140,255,.45);
+}
+
+/* path + shimmer */
+@keyframes meteor-fall {
+  0%   { transform: translate(-10vw, -15vh) rotate(65deg); opacity: 0; }
+  5%   { opacity: 1; }
+  60%  { opacity: 1; }
+  100% { transform: translate(110vw, 70vh) rotate(65deg); opacity: 0; }
+}
+
+/* different lanes + timings */
+.m1 { top: -8vh;  left: -12vw; animation-duration: 3.6s; animation-delay: .0s; }
+.m2 { top: -20vh; left: -18vw; animation-duration: 4.2s; animation-delay: 1.2s; }
+.m3 { top: -30vh; left: -8vw;  animation-duration: 3.9s; animation-delay: 2.4s; }
+/* --- Realistic SVG cat positioning + animations --- */
+.cat3d {
+  position: absolute;
+  right: 14px;
+  top: -72px;           /* sits above the card edge */
+  width: 140px;
+  height: 100px;
+  z-index: 25;
+  pointer-events: none; /* never blocks clicks */
+}
+
+/* Make sure the SVG scales nicely */
+.cat3d svg { display: block; }
+
+/* Blink animation */
+.cat3d .eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cat-blink 5.5s infinite;
+}
+@keyframes cat-blink {
+  0%, 96%, 100% { transform: scaleY(1); }
+  98%           { transform: scaleY(0.06); }
+}
+
+/* Tail wag (rotate around base) */
+.cat3d .tail {
+  transform-box: fill-box;
+  transform-origin: 170px 120px; /* near tail root */
+  animation: tail-wag 2.8s ease-in-out infinite;
+}
+@keyframes tail-wag {
+  0%,100% { transform: rotate(10deg); }
+  50%     { transform: rotate(-7deg); }
+}
+
+/* Dark theme tweaks for the cat so it doesn’t vanish */
+.scene.dark ~ .wrapper .cat3d .paws circle,
+.scene.dark ~ .wrapper .cat3d .head ellipse,
+.scene.dark ~ .wrapper .cat3d .tail path {
+  /* keep as-is; colors already high-contrast on dark */
+}
+/* Optional: brighten eyes slightly in dark mode */
+.scene.dark ~ .wrapper .cat3d .eye circle:first-child {
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.8));
+}
+/* --- RESPONSIVE CARD LAYOUT --- */
+@media (max-width: 600px) {
+  .wrapper {
+    margin: 2.5rem auto;
+    padding: 0.7rem;
+  }
+
+  .card {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+
+  .title h1 {
+    font-size: 1.4rem;
+  }
+
+  .title .badge {
+    font-size: 0.75rem;
+    padding: 0.1rem 0.45rem;
+  }
+}
+@media (max-width: 600px) {
+  .controls {
+    grid-template-columns: 1fr auto;
+    gap: 0.4rem;
+  }
+
+  input {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.9rem;
+  }
+}
+.cat3d {
+  position: absolute;
+  right: 10px;
+  top: -60px;
+  width: 26vw;
+  max-width: 140px;
+  min-width: 90px;   /* ensure it doesn't become too tiny */
+  height: auto;
+}
+
+@media (max-width: 600px) {
+  .aurora {
+    filter: blur(40px);
+  }
+  .planet {
+    transform: scale(0.7);
+  }
+  .moon {
+    transform: scale(0.75);
+  }
+  .cloud {
+    transform: scale(0.8);
+  }
+}
+@media (max-width: 600px) {
+  .meteor {
+    height: 80px;    /* reduce tail */
+    width: 1.5px;
+  }
+}
+.wrapper {
+  width: 90%;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 600px) {
+  .topbar {
+    right: 8px;
+    top: 8px;
+  }
+  .toggle {
+    padding: 0.45rem 0.7rem;
+    font-size: 0.8rem;
+  }
+}
