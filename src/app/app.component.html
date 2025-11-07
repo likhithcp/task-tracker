@@ -1,43 +1,44 @@
-<!-- SCENE BACKDROP (all effects live here) -->
+<!-- 🌌 SCENE BACKDROP (Galaxy + Meteors + Nebula + Aurora + Clouds + Planets) -->
 <div class="scene" [class.dark]="isDark">
+
   <div class="galaxy"></div>
   <div class="aurora"></div>
 
-  <!-- twinkling stars (3 layers for depth) -->
+  <!-- Twinkling Stars (3 layers) -->
   <div class="stars layer1"></div>
   <div class="stars layer2"></div>
   <div class="stars layer3"></div>
-  <!-- Celestial dust (tiny shimmering powder) -->
-<div class="stardust"></div>
 
-<!-- Volumetric nebula sheets (soft cloudy color) -->
-<div class="nebula n1"></div>
-<div class="nebula n2"></div>
+  <!-- Celestial Dust -->
+  <div class="stardust"></div>
 
-<!-- High-altitude cloud bank (broad, slow, barely visible) -->
-<div class="cloudbank"></div>
+  <!-- Nebula -->
+  <div class="nebula n1"></div>
+  <div class="nebula n2"></div>
 
-<!-- Subtle space noise & vignette for depth -->
-<div class="space-noise"></div>
-<div class="vignette"></div>
+  <!-- Cloud Bank -->
+  <div class="cloudbank"></div>
 
-  <!-- shooting stars -->
-<!-- realistic meteors -->
-<div class="meteor m1"></div>
-<div class="meteor m2"></div>
-<div class="meteor m3"></div>
+  <!-- Noise + Vignette -->
+  <div class="space-noise"></div>
+  <div class="vignette"></div>
 
-  <!-- floating particles -->
+  <!-- Meteors -->
+  <div class="meteor m1"></div>
+  <div class="meteor m2"></div>
+  <div class="meteor m3"></div>
+
+  <!-- Floating particles -->
   <div class="particles"></div>
 
-  <!-- clouds (foreground) -->
+  <!-- Foreground clouds -->
   <div class="clouds">
     <span class="cloud c1"></span>
     <span class="cloud c2"></span>
     <span class="cloud c3"></span>
   </div>
 
-  <!-- parallax moon + planets -->
+  <!-- Parallax moon & planets -->
   <div class="sky-objects">
     <div class="moon"></div>
     <div class="planet p1"></div>
@@ -45,86 +46,79 @@
   </div>
 </div>
 
-<!-- TOP BAR -->
+<!-- 🌗 TOP BAR (Theme Toggle) -->
 <header class="topbar">
   <button class="toggle" (click)="toggleTheme()">
     {{ isDark ? '☀️ Light' : '🌙 Dark' }}
   </button>
 </header>
 
-<!-- MAIN CARD (your todo UI) -->
+<!-- ✅ MAIN WRAPPER -->
 <div class="wrapper">
   <div class="card">
-    <!-- cute cat sitting on card -->
-    <!-- Realistic SVG Cat sitting on the card -->
-<div class="cat3d" aria-hidden="true">
-  <svg viewBox="0 0 220 160" width="140" height="100" xmlns="http://www.w3.org/2000/svg">
-    <!-- Shadow on card edge -->
-    <ellipse cx="110" cy="150" rx="48" ry="10" fill="rgba(0,0,0,0.15)"/>
 
-    <!-- Tail -->
-    <g class="tail">
-      <path d="M180,120 q20,-20 18,-44 q-2,-20 -18,-28 q-16,-8 -30,6"
-            fill="none" stroke="#252a4a" stroke-width="12" stroke-linecap="round"/>
-    </g>
+    <!-- 🐱 CUTE CAT SITTING ON CARD -->
+    <div class="cat3d" aria-hidden="true">
+      <svg viewBox="0 0 220 160" width="140" height="100" xmlns="http://www.w3.org/2000/svg">
 
-    <!-- Paws on edge -->
-    <g class="paws">
-      <ellipse cx="80" cy="120" rx="16" ry="12" fill="#252a4a"/>
-      <ellipse cx="130" cy="120" rx="16" ry="12" fill="#252a4a"/>
-      <!-- little paw pads -->
-      <circle cx="75" cy="124" r="2.5" fill="#e8e8f8"/>
-      <circle cx="80" cy="124" r="2.5" fill="#e8e8f8"/>
-      <circle cx="85" cy="124" r="2.5" fill="#e8e8f8"/>
-      <circle cx="125" cy="124" r="2.5" fill="#e8e8f8"/>
-      <circle cx="130" cy="124" r="2.5" fill="#e8e8f8"/>
-      <circle cx="135" cy="124" r="2.5" fill="#e8e8f8"/>
-    </g>
+        <ellipse cx="110" cy="150" rx="48" ry="10" fill="rgba(0,0,0,0.15)"/>
 
-    <!-- Head -->
-    <g class="head">
-      <!-- Ears -->
-      <path d="M60,40 l24,-26 l18,32 z" fill="#252a4a"/>
-      <path d="M160,40 l-24,-26 l-18,32 z" fill="#252a4a"/>
-      <path d="M66,35 l18,-18 l10,18 z" fill="#f5b5c8" opacity="0.9"/>
-      <path d="M154,35 l-18,-18 l-10,18 z" fill="#f5b5c8" opacity="0.9"/>
+        <g class="tail">
+          <path d="M180,120 q20,-20 18,-44 q-2,-20 -18,-28 q-16,-8 -30,6"
+                fill="none" stroke="#252a4a" stroke-width="12" stroke-linecap="round"/>
+        </g>
 
-      <!-- Face -->
-      <ellipse cx="110" cy="70" rx="58" ry="46" fill="#252a4a" />
-      <!-- cheeks -->
-      <ellipse cx="82" cy="86" rx="9" ry="7" fill="#ffccd5" opacity="0.85"/>
-      <ellipse cx="138" cy="86" rx="9" ry="7" fill="#ffccd5" opacity="0.85"/>
+        <g class="paws">
+          <ellipse cx="80" cy="120" rx="16" ry="12" fill="#252a4a"/>
+          <ellipse cx="130" cy="120" rx="16" ry="12" fill="#252a4a"/>
+          <circle cx="75" cy="124" r="2.5" fill="#e8e8f8"/>
+          <circle cx="80" cy="124" r="2.5" fill="#e8e8f8"/>
+          <circle cx="85" cy="124" r="2.5" fill="#e8e8f8"/>
+          <circle cx="125" cy="124" r="2.5" fill="#e8e8f8"/>
+          <circle cx="130" cy="124" r="2.5" fill="#e8e8f8"/>
+          <circle cx="135" cy="124" r="2.5" fill="#e8e8f8"/>
+        </g>
 
-      <!-- Eyes -->
-      <g class="eye left">
-        <circle cx="90" cy="70" r="12" fill="#ffffff"/>
-        <circle cx="94" cy="70" r="5.5" fill="#0b0b0b"/>
-        <circle cx="96" cy="67" r="2" fill="#ffffff" opacity="0.9"/>
-      </g>
-      <g class="eye right">
-        <circle cx="130" cy="70" r="12" fill="#ffffff"/>
-        <circle cx="126" cy="70" r="5.5" fill="#0b0b0b"/>
-        <circle cx="124" cy="67" r="2" fill="#ffffff" opacity="0.9"/>
-      </g>
+        <g class="head">
+          <path d="M60,40 l24,-26 l18,32 z" fill="#252a4a"/>
+          <path d="M160,40 l-24,-26 l-18,32 z" fill="#252a4a"/>
+          <path d="M66,35 l18,-18 l10,18 z" fill="#f5b5c8" opacity="0.9"/>
+          <path d="M154,35 l-18,-18 l-10,18 z" fill="#f5b5c8" opacity="0.9"/>
 
-      <!-- Nose + mouth -->
-      <polygon points="110,80 106,86 114,86" fill="#f0a7b7"/>
-      <path d="M106,88 q-6,8 -16,8" stroke="#e8e8f8" stroke-width="2" fill="none" stroke-linecap="round"/>
-      <path d="M114,88 q6,8 16,8"  stroke="#e8e8f8" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <ellipse cx="110" cy="70" rx="58" ry="46" fill="#252a4a" />
 
-      <!-- whiskers -->
-      <path d="M72,78 h20" stroke="#e8e8f8" stroke-width="2" stroke-linecap="round"/>
-      <path d="M72,84 h18" stroke="#e8e8f8" stroke-width="2" stroke-linecap="round"/>
-      <path d="M148,78 h-20" stroke="#e8e8f8" stroke-width="2" stroke-linecap="round"/>
-      <path d="M150,84 h-18" stroke="#e8e8f8" stroke-width="2" stroke-linecap="round"/>
-    </g>
-  </svg>
-</div>
+          <ellipse cx="82" cy="86" rx="9" ry="7" fill="#ffccd5" opacity="0.85"/>
+          <ellipse cx="138" cy="86" rx="9" ry="7" fill="#ffccd5" opacity="0.85"/>
 
+          <g class="eye left">
+            <circle cx="90" cy="70" r="12" fill="#ffffff"/>
+            <circle cx="94" cy="70" r="5.5" fill="#0b0b0b"/>
+            <circle cx="96" cy="67" r="2" fill="#ffffff" opacity="0.9"/>
+          </g>
 
+          <g class="eye right">
+            <circle cx="130" cy="70" r="12" fill="#ffffff"/>
+            <circle cx="126" cy="70" r="5.5" fill="#0b0b0b"/>
+            <circle cx="124" cy="67" r="2" fill="#ffffff" opacity="0.9"/>
+          </g>
+
+          <polygon points="110,80 106,86 114,86" fill="#f0a7b7"/>
+          <path d="M106,88 q-6,8 -16,8" stroke="#e8e8f8" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M114,88 q6,8 16,8"  stroke="#e8e8f8" stroke-width="2" fill="none" stroke-linecap="round"/>
+
+          <path d="M72,78 h20" stroke="#e8e8f8" stroke-width="2" stroke-linecap="round"/>
+          <path d="M72,84 h18" stroke="#e8e8f8" stroke-width="2" stroke-linecap="round"/>
+          <path d="M148,78 h-20" stroke="#e8e8f8" stroke-width="2" stroke-linecap="round"/>
+          <path d="M150,84 h-18" stroke="#e8e8f8" stroke-width="2" stroke-linecap="round"/>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- ✅ NEW ADVANCED TO-DO UI -->
     <div class="title">
       <h1>📝 To-Do List</h1>
-      <span class="badge">{{ tasks.length }} tasks</span>
+      <span class="badge">{{ remainingCount }} left</span>
     </div>
 
     <div class="controls">
@@ -137,20 +131,81 @@
       <button class="btn btn-primary" (click)="addTask()">Add</button>
     </div>
 
-    <p class="empty" *ngIf="tasks.length === 0">
-      Your list is empty. Add your first task ✨
+    <!-- FILTER BAR -->
+    <div class="filters">
+      <button class="chip" [class.active]="filter==='all'" (click)="setFilter('all')">All</button>
+      <button class="chip" [class.active]="filter==='active'" (click)="setFilter('active')">Active</button>
+      <button class="chip" [class.active]="filter==='completed'" (click)="setFilter('completed')">Completed</button>
+
+      <span class="spacer"></span>
+
+      <button class="chip danger" (click)="clearCompleted()">Clear completed</button>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <p class="empty" *ngIf="filtered.length === 0">
+      Nothing here. Add a task ✨
     </p>
 
-    <ul class="list" *ngIf="tasks.length > 0">
-      <li class="item" *ngFor="let task of tasks; let i = index">
-        <span class="item-text">{{ task }}</span>
+    <!-- TASK LIST -->
+    <ul class="list" *ngIf="filtered.length > 0">
+      <li class="item"
+          *ngFor="let task of filtered; let i = index"
+          [class.done]="task.done">
+
+        <label class="task">
+
+          <!-- checkbox -->
+          <input 
+            type="checkbox"
+            [checked]="task.done"
+            (change)="toggleDone(task)"
+          />
+
+          <!-- display mode -->
+          <span class="text"
+                *ngIf="editingId !== task.id"
+                (dblclick)="startEdit(task)">
+            {{ task.title }}
+          </span>
+
+          <!-- edit mode -->
+          <input
+            *ngIf="editingId === task.id"
+            class="edit-input"
+            [(ngModel)]="editingTitle"
+            (keyup.enter)="confirmEdit(task)"
+            (blur)="confirmEdit(task)"
+            (keyup.escape)="cancelEdit()"
+            autofocus
+          />
+
+        </label>
+
         <button class="btn btn-ghost" (click)="removeTask(i)">❌</button>
       </li>
     </ul>
 
+    <!-- FOOTER -->
     <div class="footer">
-      <span>Tip: Press Enter to add quickly</span>
-      <span>✔ Focus. Do. Delete.</span>
+      <span>{{ tasks.length }} total • {{ remainingCount }} left</span>
+      <span>Tip: Double-click a task to edit</span>
     </div>
+
+    <!-- BACKGROUND MUSIC CONTROLS -->
+    <div class="music-controls">
+      <label>Background song (YouTube link):</label>
+      <div class="music-row">
+        <input type="text" [(ngModel)]="videoUrl" placeholder="Paste YouTube link here" />
+        <button class="btn" (click)="loadVideo()">Load</button>
+        <button class="btn" (click)="play()" [disabled]="!videoId">Play</button>
+        <button class="btn" (click)="pause()" [disabled]="!videoId">Pause</button>
+      </div>
+      <small class="muted">Note: browser autoplay policies usually require a user gesture to start audio.</small>
+
+      <!-- hidden player container (we keep it visually tiny) -->
+      <div id="yt-player" style="width:0;height:0;overflow:hidden;" aria-hidden="true"></div>
+    </div>
+
   </div>
 </div>
