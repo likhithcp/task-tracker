@@ -51,6 +51,16 @@
   <button class="toggle" (click)="toggleTheme()">
     {{ isDark ? '☀️ Light' : '🌙 Dark' }}
   </button>
+  <!-- Small play/pause control (controls background audio) -->
+  <button
+    class="music-toggle"
+    (click)="videoId ? (isPlaying ? pause() : play()) : null"
+    [disabled]="!videoId"
+    [attr.aria-pressed]="isPlaying"
+    title="Play / Pause background song"
+  >
+    {{ isPlaying ? '⏸️' : '▶️' }}
+  </button>
 </header>
 
 <!-- ✅ MAIN WRAPPER -->

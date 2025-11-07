@@ -31,6 +31,20 @@
   color: #0f172a;
 }
 
+/* layout for topbar: keep buttons inline */
+.topbar { display: flex; gap: .5rem; align-items: center; }
+.music-toggle {
+  padding: 0.45rem 0.65rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+}
+.music-toggle[disabled] { opacity: 0.45; cursor: not-allowed; }
+.scene.dark ~ .topbar .music-toggle { background: rgba(0,0,0,0.08); color: #eaf0ff; }
+
 /* =======================
    COSMIC BACKDROP LAYERS
    Everything is position:fixed with negative z-index so it never blocks clicks
@@ -610,7 +624,8 @@ input:focus { border-color: #6366f1; box-shadow: 0 0 0 4px #eef2ff; }
 .scene.dark ~ .wrapper .cat3d .paws circle,
 .scene.dark ~ .wrapper .cat3d .head ellipse,
 .scene.dark ~ .wrapper .cat3d .tail path {
-  /* keep as-is; colors already high-contrast on dark */
+  /* keep as-is; ensure no empty ruleset to satisfy linters */
+  fill-opacity: 1;
 }
 /* Optional: brighten eyes slightly in dark mode */
 .scene.dark ~ .wrapper .cat3d .eye circle:first-child {
